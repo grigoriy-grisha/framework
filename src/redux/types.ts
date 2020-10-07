@@ -1,0 +1,1 @@
+export const PRODUCT_GET_ITEMS = 'PRODUCT_GET_ITEMS'

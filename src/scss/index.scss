@@ -1,0 +1,22 @@
+@import './revisions.scss';
+@import './symmary.scss';
+@import './search-product.scss';
+
+body {
+    background: rgb(245, 245, 245);
+}
+#main {
+    display: flex;
+}
+.display-flex {
+    display: flex;
+}
+.align-center {
+    align-items: center;
+}
+.green-color {
+    color: #43A047 !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}

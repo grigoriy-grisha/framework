@@ -1,0 +1,64 @@
+.symmary {
+
+    &__title {
+        font-weight: 600;
+    }
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 50px;
+        border-bottom: 2px solid #757575;
+    }
+    &__row {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+    &__micronutrients {
+        margin-left: 75px;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+    &__detailed-info {
+        margin-top: 50px;
+        font-size: 17px;
+        line-height: 1.4;
+    }
+    &__macronutrients-info {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__macronutrients--item {
+        display: flex;
+        align-items: center;
+        & span:not(:first-child) {
+            margin-left: 10px;
+        }
+    }
+    &__graph {
+        display: flex;
+        height: 60px;
+        width: 100%;
+        margin-top: 40px;
+        &--item {
+            height: inherit;
+        }
+        &--fat {
+            width: 30%;
+        }
+        &--protein {
+            width: 50%;
+        }
+        &--carbohydrates {
+            width: 20%;
+        }
+        
+    }
+}
+.color {
+    display: block;
+    width: 20px;
+    height: 20px;
+}

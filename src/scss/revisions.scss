@@ -1,0 +1,42 @@
+#nav-mobile li a {
+    width: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#datepicker {
+    width: 250px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    margin-left: 30px;
+}
+.the-datepicker__main {
+    margin-top: 5px;
+    margin-left: 30px;
+}   
+.card-action {
+    background-color: #ddd !important;
+    color: #888;
+    padding: 18px 30px !important;
+}
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px !important;
+    background: #fff ;
+    color: #000 !important;
+    font-weight: 600;
+}
+.container {
+    width: 93%  !important;
+    max-width: 1800px;
+}
+.card-block {
+    padding: 30px;
+    min-width: 700px;
+    max-width: 700px;
+}
+#datepicker::placeholder {
+    color: #fff;
+}

@@ -1,0 +1,22 @@
+.search-product {
+    width: 70%;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 25px;
+    &__input {
+        margin-left: 15px;
+
+        &::placeholder {
+            color: #747474;
+        }
+    }
+    &--item {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #757575 ;
+        font-weight: 600;
+    }
+    
+}
