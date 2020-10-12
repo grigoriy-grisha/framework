@@ -5,19 +5,19 @@ export const initialState = {
   currentId: "" as string,
   Breakfast: {
     symmary: 0 as number,
-    products: [] as IEating | [],
+    products: [] as Array<IEating> | [],
   },
   Dinner: {
     symmary: 0 as number,
-    products: [] as IEating | [],
+    products: [] as Array<IEating> | [],
   },
   Supper: {
     symmary: 0 as number,
-    products: [] as IEating | [],
+    products: [] as Array<IEating> | [],
   },
   Snack: {
     symmary: 0 as number,
-    products: [] as IEating | [],
+    products: [] as Array<IEating> | [],
   },
   total: {
     left: 2600 as number,

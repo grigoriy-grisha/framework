@@ -6,7 +6,7 @@ import { numberNutrient } from "../../constants";
 import { ActiveRouter } from "../../core/Router/ActiveRouter";
 import { actions } from "../../redux/actions";
 export class Product extends Component<{}> {
-  public static  className = "roduct";
+  public static className = "roduct";
   nutrients: Array<IProductItemNutrients>;
   currentProduct: IPrductItem;
   currentEating: string;
@@ -69,7 +69,10 @@ export class Product extends Component<{}> {
         return item.number === "208";
       })[0].amount;
 
-      value = !!input!.value() ? (energy * +input!.value()) / 100 : energy;
+      value = !!validationMass(input!.value())
+        ? (energy * +input!.value()) / 100
+        : energy;
+      console.log(value);
 
       const id = hash();
       this.$dispatch(
@@ -99,10 +102,6 @@ export class Product extends Component<{}> {
 
     if (value) {
       validation = validationMass(value);
-    }
-
-    if (validation) {
-      $target.value(validation);
     }
   }
 

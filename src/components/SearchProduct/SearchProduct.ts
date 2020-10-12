@@ -35,7 +35,7 @@ export class SearchProduct extends Component<StateType> {
   toHTML() {
     this.maxPage = maxPage(this.productItems.length, this.range);
     this.productItems = this.$getState().productItems;
-    console.log(this.state);
+
 
     return `
     <div class="search-product">
@@ -97,10 +97,8 @@ export class SearchProduct extends Component<StateType> {
 
   clickProduct($target: any) {
     const href = $target.closest("a").attr("href");
-    const object = JSON.parse($target.attr("data-object"));
-    const id = $target.attr("data-id");
-    this.$dispatch(actions.setItemProduct(object));
-    this.$dispatch(actions.setCurrentId(id));
+    const id = $target.attr("data-id")
+    this.$dispatch(actions.setItemProduct(id));
     ActiveRouter.navigate(href);
   }
 

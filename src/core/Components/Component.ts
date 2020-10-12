@@ -57,8 +57,7 @@ export class Component<S> extends DomListener  {
 
   init() {
     this.$main = $(document.body).find(classes(this.options.className))!;
-    console.log(this.$main);
-    
+
     this.initDomListeners();
   }
 

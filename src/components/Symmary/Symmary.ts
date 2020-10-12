@@ -60,8 +60,6 @@ export class Symmary extends Component<initialStateType>  {
   `;
   }
   storeChanged(change: any) {
-    console.log(change);
-    
     this.setState(change)
   }
   init() {

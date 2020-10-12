@@ -15,7 +15,9 @@ export function getPage(pages: any, path: any, param: string) {
 export function hashCode(str: string) {
   return str + "-" + new Date().valueOf();
 }
-
+export function getString(num: number) {
+  return num + "";
+}
 export function hash() {
   return "" + new Date().valueOf();
 }
@@ -44,10 +46,12 @@ export function maxPage(length: number, range: number) {
   return Math.ceil(length / range);
 }
 
-export function validationMass(str: any = "") {
+export function validationMass(str: string = "") {
   let coincidence = str.replace(/\D/, "");
-  coincidence = str.replace(/\D/, "");
-
+ 
+  // if (coincidence.match(/\D/)) {
+  //   coincidence = '100'
+  // }
   if (coincidence) {
     return coincidence;
   }

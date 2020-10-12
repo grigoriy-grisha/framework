@@ -37,3 +37,13 @@ interface OptionsType {
 
 }
 
+interface ISetEating {
+  eating: string
+  prodicts: {
+    id: string
+    name: string
+    nutrients: Array<IProductItemNutrients>
+    value: number
+  }
+}
+

@@ -1,4 +1,5 @@
 export function renderMacronutrients(currentProduct: any) {
+
   const filterProduct = currentProduct.filter((item: any) => {
     return !item.name.match(/\d:\d/)
   });
