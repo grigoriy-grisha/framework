@@ -1,0 +1,78 @@
+@import './revisions.scss';
+@import './symmary.scss';
+@import './search-product.scss';
+@import './card-product.scss';
+
+body {
+    background: rgb(245, 245, 245);
+}
+
+#main {
+    display: flex;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.green-color {
+    color: #43A047 !important;
+}
+
+.red-color {
+    color: #ce0a0a !important;
+}
+
+
+.black-color {
+    color: #000 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.background-hover:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    transition: .4s;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #a5a5a5;
+}
+
+a {
+    display: block;
+    z-index: 100;
+}
+
+button {
+    border: none;
+    background: transparent;
+
+    &:focus {
+        border: none;
+        background: transparent;
+    }
+}
+
+input {
+    width: 250px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.preloader-wrapper {
+    position: absolute;
+    left: 50%;
+}

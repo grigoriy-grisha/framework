@@ -1,0 +1,61 @@
+.symmary {
+
+    &__title {
+        font-weight: 600;
+    }
+    &__info {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-bottom: 50px;
+        border-bottom: 1px solid #757575;
+    }
+    &__row {
+        width: 350px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+    &__micronutrients {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+    &__detailed-info {
+        margin-top: 50px;
+        font-size: 17px;
+        line-height: 1.4;
+    }
+    &__block {
+        border-bottom: 1px solid #757575;
+    }
+    &__macronutrients-info {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__macronutrients--item {
+        display: flex;
+        align-items: center;
+        & span:not(:first-child) {
+            margin-left: 10px;
+        }
+    }
+    &__graph {
+        display: flex;
+        height: 60px;
+        width: 100%;
+        margin-top: 40px;
+        border: 1px solid #a5a5a5;
+        background: rgba(0,0,0,0.04) ;
+        &--item {
+            height: inherit;
+        }
+ 
+    }
+}
+.color {
+    display: block;
+    width: 20px;
+    height: 20px;
+}

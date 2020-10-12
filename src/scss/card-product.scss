@@ -1,0 +1,17 @@
+.card-action {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color: #000;
+    
+}
+.card-input {
+    width: 250px !important;
+
+    &::placeholder {
+        color: #000;
+    }
+}
+.card-wrapper {
+   margin-right: 100px; 
+}
