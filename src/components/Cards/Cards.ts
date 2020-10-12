@@ -1,5 +1,5 @@
-import { initialStateType } from './../../redux/initialState';
-import { actions } from './../../redux/actions';
+import { initialStateType } from "./../../redux/initialState";
+import { actions } from "./../../redux/actions";
 import { cardName } from "../../constants";
 import { Component } from "../../core/Components/Component";
 import { $ } from "../../core/Utils/dom";
@@ -7,28 +7,25 @@ import { cardRender } from "./cards.functions";
 import { ActiveRouter } from "../../core/Router/ActiveRouter";
 import { isAttr } from "../../core/Utils/utils";
 export class Cards extends Component<{}> {
-  public static  className = "cards";
-  eating: initialStateType
+  public static className = "cards";
+  eating: initialStateType;
   constructor(protected options: any) {
-    super({ 
+    super({
       listeners: ["click"],
       subscribe: ["Breakfast", "Dinner", "Supper", "Snack"],
       ...options,
     });
 
-   
-    this.eating = this.$getState()
+    this.eating = this.$getState();
   }
 
   toHTML() {
-    this.eating = this.$getState()
-    
+    this.eating = this.$getState();
+
     return cardName
-          .map((name: string) => cardRender(name, this.eating))
-          .join("");
-   
+      .map((name: string) => cardRender(name, this.eating))
+      .join("");
   }
-  
 
   onClick(e: any) {
     const $target = $(e.target);
@@ -42,12 +39,17 @@ export class Cards extends Component<{}> {
       if (isAttr(attribute, "delete")) {
         const eating = $target.attr("data-eating");
         const id = $target.attr("data-id");
-        this.$dispatch(
-          actions.deleteProduct({
-            currentEating: eating,
-            id: id,
-          })
-        );
+
+        if (eating && id) {
+          this.$dispatch(
+            actions.deleteProduct({
+              currentEating: eating,
+              id: id,
+            })
+          );
+        } else {
+          alert('Не удалось удалить продукт!!1')
+        }
       }
     }
   }

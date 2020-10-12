@@ -14,7 +14,7 @@ export class Header extends Component<{}> {
 
   toHTML() {
     return `  
-      <nav> 
+      <nav class="green darken-1"> 
         <div class="nav-wrapper green darken-1">
           <div class="container"> 
               <ul id="nav-mobile" class="right hide-on-med-and-down">

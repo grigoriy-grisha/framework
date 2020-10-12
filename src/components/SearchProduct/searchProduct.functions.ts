@@ -11,10 +11,8 @@ export function renderProductItems(array: any, page: number, range: number) {
       const item = array[i];
       
       markup += `
-          <a href="#search/${item.fdcId}" class="black-color" >
-            <div class="search-product--item background-hover" data-type="product" data-object='${JSON.stringify(
-              item
-            )}'>
+          <a href="#search/${item.fdcId}" class="black-color">
+            <div class="search-product--item background-hover" data-type="product" data-id="${item.fdcId}">
                 <div>
                     <div class="search-product__name">Name: <span>${
                       item.description
