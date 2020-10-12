@@ -39,3 +39,6 @@ export class StoreSubscriber {
     this.sub.unsubscribe();
   }
 }
+
+
+export type StoreSubscriberType = StoreSubscriber

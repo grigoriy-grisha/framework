@@ -7,9 +7,8 @@ export class createStore {
     this.rootReducer = rootReducer;
   }
 
-  dispatch(action: any) {
+  dispatch<T>(action: T) {
     this.state = this.rootReducer(this.state, action);
-
     this.listeners.forEach((listener: any) => listener(this.state));
   }
 
@@ -27,3 +26,6 @@ export class createStore {
     };
   }
 }
+
+
+export type StoreType = createStore

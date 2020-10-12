@@ -1,3 +1,5 @@
+
+
 class Dom {
   $el: Element;
   constructor(protected selector: string | Element) {
@@ -16,6 +18,7 @@ class Dom {
 
   html(html: string) {
     if (html) {
+      
       this.$el.innerHTML = html;
       return this;
     }
@@ -23,20 +26,32 @@ class Dom {
   }
 
   clear() {
-    this.$el.innerHTML = ''
-    return this
+    this.$el.innerHTML = "";
+    return this;
+  }
+  toStringHtml() {
+    return this.$el.innerHTML;
   }
 
-  toStringHtml() {
+  value(value: string = '') {
+    if (this.$el.tagName.toUpperCase() === "INPUT") {
+      if (value) {
+        this.$el.value = value;
+      }
+      return this.$el.value;
+    }
     return this.$el.innerHTML
   }
 
   closest(selector: string) {
-      return this.$el.closest(selector)
+    const el = this.$el.closest(selector);
+    if (el) {
+      return $(el);
+    }
   }
 
-  data(attr: string) {
-    return this.$el.getAttribute(attr)
+  attr(attr: string) {
+    return this.$el.getAttribute(attr);
   }
 
   append(node: Dom | Element) {
@@ -68,3 +83,5 @@ $.create = (tagName: string, clases = "") => {
   }
   return $($el);
 };
+
+export type DomInstanseType = ReturnType<typeof $>

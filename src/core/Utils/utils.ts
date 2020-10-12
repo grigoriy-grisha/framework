@@ -2,15 +2,97 @@ export function isEqual(prevState: any, state: any) {
   return JSON.stringify(prevState) === JSON.stringify(state);
 }
 
-export function getPage(pages: any, path: string) {
-  return pages[path];
+export function getPage(pages: any, path: any, param: string) {
+  let page = null;
+  if (path.includes(param)) {
+    page = path.replace(param, ":id");
+    return pages[page];
+  }
+  page = pages[path];
+  return page;
 }
 
 export function hashCode(str: string) {
-  return str + str.split('').reduce((prevHash, currVal) =>
-    (((prevHash << Math.random() * 15) - prevHash) + currVal.charCodeAt(0))|0, 0);
+  return str + "-" + new Date().valueOf();
 }
 
-export function isAttr(received: string , expected: string) {
-  return received === expected
+export function hash() {
+  return "" + new Date().valueOf();
 }
+export function isAttr(received: string | null, expected: string) {
+  return received === expected;
+}
+
+export function storage(name: string, obj: any) {
+  localStorage.setItem(name, JSON.stringify(obj));
+}
+export function validation(name: string, reg: RegExp): string | undefined {
+  const match = name.match(reg);
+  if (match) {
+    return match[0];
+  }
+}
+export function initState(name: string, obj: any) {
+  const storage = localStorage.getItem(name);
+  if (storage) {
+    return JSON.parse(storage);
+  }
+  return obj;
+}
+
+export function maxPage(length: number, range: number) {
+  return Math.ceil(length / range);
+}
+
+export function validationMass(str: any = "") {
+  let coincidence = str.replace(/\D/, "");
+  coincidence = str.replace(/\D/, "");
+
+  if (coincidence) {
+    return coincidence;
+  }
+}
+
+export function percent(all: number, number: number) {
+  return number && all ? ((number / all) * 100).toFixed(2) : 0;
+}
+
+export function classes(className: string) {
+  return "." + className;
+}
+
+export function find(array: Array<any>, field: string, anotherField: any) {
+  return array.find((elem: any) => {
+    return elem[field] === anotherField;
+  });
+}
+
+export function incdec(left: number, right: number, operator: "+" | "-") {
+  return eval(`+(${left} ${operator} ${right}).toFixed(2)`);
+}
+
+export function fixed(expresion: number, fixed: number = 2) {
+  return +expresion.toFixed(fixed);
+}
+// export const IndexedArray = new Proxy(Array, {
+//   construct(target, [args]) {
+//     const index = {}
+//     args.forEach((item: any) => (index[item.id] = item))
+
+//     return new Proxy(new target(...args), {
+//       get(arr, prop) {
+//         switch (prop) {
+//           case 'push':
+//             return (item: any) => {
+//               index[item.id] = item
+//               arr[prop].call(arr, item)
+//             }
+//           case 'findById':
+//             return id => index[id]
+//           default:
+//             return arr[prop]
+//         }
+//       }
+//     })
+//   }
+// })

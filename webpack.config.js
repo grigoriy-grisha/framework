@@ -1,5 +1,7 @@
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -27,11 +29,9 @@ const babelOptions = preset => {
 }
 
 const jsLoaders = () => {
-  const loaders = [
-    {
-      loader: 'babel-loader',
-    }
-  ]
+  const loaders = [{
+    loader: 'babel-loader',
+  }]
 
   if (isDev) {
     loaders.push('eslint-loader')
@@ -58,7 +58,8 @@ module.exports = {
   devtool: isDev ? 'source-map' : false,
   devServer: {
     port: 3000,
-    hot: isDev
+    hot: isDev,
+    historyApiFallback: true,
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -69,22 +70,18 @@ module.exports = {
         collapseWhitespace: isProd
       }
     }),
-    new CopyPlugin([
-      {
-        from: path.resolve(__dirname, 'src/favicon.ico'),
-        to: path.resolve(__dirname, 'dist')
-      }
-    ]),
+    new CopyPlugin([{
+      from: path.resolve(__dirname, 'src/favicon.ico'),
+      to: path.resolve(__dirname, 'dist')
+    }]),
     new MiniCssExtractPlugin({
       filename: filename('css')
     })
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.s[ac]ss$/i,
-        use: [
-          {
+        use: [{
             loader: MiniCssExtractPlugin.loader,
             options: {
               hmr: isDev,

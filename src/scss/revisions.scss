@@ -10,33 +10,67 @@
     border-bottom: 1px solid #fff;
     margin-left: 30px;
 }
+
+.the-datepicker__day-content,
+.the-datepicker__main,
+.the-datepicker__button:hover {
+    border-radius: 0 !important;
+}
+
 .the-datepicker__main {
     margin-top: 5px;
     margin-left: 30px;
-}   
+}
+
 .card-action {
     background-color: #ddd !important;
     color: #888;
     padding: 18px 30px !important;
 }
+
 .card-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px !important;
-    background: #fff ;
+    background: #fff;
     color: #000 !important;
     font-weight: 600;
+
+    & .delete {
+        display: none;
+        transition: .3s;
+
+        &:hover {
+            color: #d50000 ;
+        }
+    }
+
+    &:hover {
+        transition: .3s;
+
+        & .delete {
+            display: block;
+        }
+
+        & .value {
+            display: none;
+        }
+    }
 }
+
 .container {
-    width: 93%  !important;
+    width: 93% !important;
     max-width: 1800px;
 }
+
 .card-block {
     padding: 30px;
     min-width: 700px;
     max-width: 700px;
 }
+
 #datepicker::placeholder {
     color: #fff;
 }
+

@@ -10,7 +10,6 @@ export class Router {
     this.pages = pages;
     this.selector = selector;
     this.init();
-    console.log(this.pages);
     this.prevPage = null;
     this.handlerhash = this.handlerhash.bind(this);
   }
@@ -22,19 +21,30 @@ export class Router {
 
   handlerhash() {
     const path = ActiveRouter.path;
+    const param = ActiveRouter.param
     const $mainSelector = $(document.body).find(this.selector);
-    if (!!getPage(this.pages, path) && $mainSelector) {
+
+    if (!!getPage(this.pages, path, param) && $mainSelector) {
       if (this.prevPage) {
         this.prevPage.destroy();
       }
-      
       $mainSelector.clear();
-
-      const page = getPage(this.pages, path).getRoot();
+         
+      const page = getPage(this.pages, path, param).getRoot();
       $mainSelector.append(page);
-      getPage(this.pages, path).init();
+      getPage(this.pages, path, param).init();
 
-      this.prevPage = getPage(this.pages, path);
+      this.prevPage = getPage(this.pages, path, param)
+    
+    } else if ($mainSelector){
+      if (this.prevPage) {
+        this.prevPage.destroy();
+      }
+      $mainSelector.clear();
+      const keyPage = Object.keys(this.pages)[0]
+      const page = this.pages[keyPage].getRoot();
+      $mainSelector.append(page);
+      this.pages[keyPage].init();
     }
   }
 

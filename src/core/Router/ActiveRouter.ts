@@ -12,4 +12,12 @@ export class ActiveRouter {
   static navigate(path: string) {
     window.location.hash = path;
   }
+
+  static get href() {
+    return window.location.href;
+  }
+
+  static goBack() {
+    history.back();
+  }
 }

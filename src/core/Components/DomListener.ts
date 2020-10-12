@@ -1,13 +1,22 @@
+import { DomInstanseType } from './../Utils/dom';
 import { $ } from "../Utils/dom";
+import { classes } from "../Utils/utils";
 
 export class DomListener {
-  constructor(protected $root: any, protected listeners: Array<string>,protected className: string) {
-    if (!$root) {
-      throw new Error(`No $root provided for DomListener!`);
+  $main!: DomInstanseType;
+  constructor(protected listeners: Array<string>, protected className: string) {
+ 
+    if (!className) {
+      throw new Error(`No className provided for DomListener!`);
     }
+
+    if (!listeners || !Array.isArray(listeners)) {
+      throw new Error(`Need provide listenrs for DomListener or listeners must have instance of Array!`);
+    }
+
     this.listeners = listeners;
     this.className = className;
-    this.$root = $root;
+    
   }
 
   initDomListeners() {
@@ -19,10 +28,8 @@ export class DomListener {
         );
       }
       (this as any)[method] = (this as any)[method].bind(this);
-      
-      $(document.body).find(classes(this.className))?.on(listener, (this as any)[method]);
-      
-      // this.$root.on(listener, (this as any)[method]);
+      this.$main = $(document.body).find(classes(this.className))!;
+      this.$main.on(listener, (this as any)[method]);
     });
   }
 
@@ -30,7 +37,7 @@ export class DomListener {
     this.listeners.forEach((listener: string) => {
       const method = capitalize(listener);
       (this as any)[method] = (this as any)[method].bind(this);
-      this.$root.off(listener, (this as any)[method]);
+      this.$main.off(listener, (this as any)[method]);
     });
   }
 }
@@ -38,8 +45,3 @@ export class DomListener {
 function capitalize(listener: string) {
   return "on" + listener[0].toUpperCase() + listener.slice(1);
 }
-
-function classes(className: string) {
-  return '.' + className
-}
-

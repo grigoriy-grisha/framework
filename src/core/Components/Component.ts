@@ -1,60 +1,64 @@
+import { DomInstanseType } from "./../Utils/dom";
 import { DomListener } from "./DomListener";
-import { isEqual } from "../Utils/utils";
+import { classes, isEqual } from "../Utils/utils";
+import { $ } from "../Utils/dom";
+import { initialStateType } from "../../redux/initialState";
+import { StoreType } from "../redux/createStore";
 
-export class Component extends DomListener {
-  protected name: string;
-  store: any;
-  state: any;
+
+
+export class Component<S> extends DomListener  {
+  store: StoreType;
+  state!: S;
   subscribe: Array<string>;
-  constructor(protected $root: any, protected options: any) {
-    super($root, options.listeners, options.className);
-    this.name = options.name || "";
+  $main!: DomInstanseType;
+  constructor(protected options: OptionsType) {
+    super(options.listeners, options.className);
+
     this.store = options.store;
     this.subscribe = options.subscribe;
-    console.log();
-    
     this.prepare();
   }
 
   prepare() {}
 
-  initState(initialState = {}) {
+  initState(initialState: S) {
     this.state = { ...initialState };
   }
-  $getState() {
-    return this.store.getState()
+  $getState(): initialStateType {
+    return this.store.getState();
   }
 
-  setState(newState: any) {
-    const nextState = { ...this.state, ...newState }
-    if (!isEqual(this.state,nextState )) {
-      this.state = nextState;
-      this.$root.html(this.toHTML())
+  setState<T>(newState: T) {
+    const nextState = { ...this.state, ...newState };
+    
+    if (!isEqual(this.state, nextState)) {
+      this.state = nextState
+      this.$main!.html(this.toHTML());
     }
-    
-    
   }
-  $dispatch(action: any) {
-    const prevState = this.store.getState()
+  $dispatch<T>(action: T) {
+    const prevState = this.store.getState();
 
-    this.store.dispatch(action);
-
-    if (!isEqual(prevState ,this.store )) {
-      this.$root.html(this.toHTML())
+    this.store.dispatch<T>(action);
+    if (!isEqual(prevState, this.store.getState())) { 
+      this.$main!.html(this.toHTML());
     }
-    
   }
   toHTML() {
     return ``;
   }
 
-  storeChanged(change: any) {}
+  storeChanged<T>(change: T) {}
 
   isWatching(key: any) {
     return this.subscribe.includes(key);
   }
 
   init() {
+    this.$main = $(document.body).find(classes(this.options.className))!;
+    console.log(this.$main);
+    
     this.initDomListeners();
   }
 
