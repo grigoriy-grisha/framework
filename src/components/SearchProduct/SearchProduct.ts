@@ -40,7 +40,7 @@ export class SearchProduct extends Component<StateType> {
     return `
     <div class="search-product">
       <div>
-        <div class="display-flex align-center">        
+        <div class="display-flex align-center input-wrapper">        
             <input type="text"  class="search-product__input" data-type="product__input" placeholder="Ведите название продукта">
             <i class="material-icons green-color cursor-pointer background-hover" data-type="send">arrow_forward</i>
         </div>

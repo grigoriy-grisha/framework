@@ -36,6 +36,10 @@ body {
     cursor: pointer;
 }
 
+.cursor-default {
+    cursor: default !important;
+}
+
 .circle {
     border-radius: 50%;
 }
@@ -63,6 +67,9 @@ button {
         background: transparent;
     }
 }
+.disable {
+    background: rgba(0, 0, 0, 0.1);
+}
 
 input {
     width: 250px;
@@ -76,4 +83,12 @@ input {
     position: absolute;
     margin: 300px 0;
     left: 50%;
+}
+
+.not-found {
+    position: absolute;
+    text-align: center;
+    left: 42%;
+    top: 50%;
+    font-size: 25px;
 }
