@@ -6,15 +6,16 @@ export const SET_NUTRIENTS = "SET_NUTRIENTS";
 export const SET_CURRENT_ID = "SET_CURRENT_ID";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
+export type ProductType = {
+  id: string;
+  name: string;
+  nutrients: Array<IProductItemNutrients>;
+  value: number;
+}
 
 export type SetEatingType = {
     eating: string;
-    products: {
-      id: string;
-      name: string;
-      nutrients: Array<IProductItemNutrients>;
-      value: number;
-    };
+    products: ProductType
   };
   
   export type SetNutrientsType = {
@@ -22,7 +23,7 @@ export type SetEatingType = {
     totalNutrients: Array<IProductItemNutrients>
   }
   
-  export type deleteProductType = {
+  export type DeleteProductType = {
     currentEating: string,
     id: string,
   }

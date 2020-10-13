@@ -1,7 +1,16 @@
 import { find, fixed, getString, incdec } from "../core/Utils/utils";
 import { numberMacronutrients } from "./../constants";
 import { ActionType } from "./actions";
-import { initialStateType } from "./initialState";
+import {
+  EatingType,
+  initialStateType,
+  TotalNutrientsType,
+  TotalType,
+} from "./initialState";
+import {
+  ProductType,
+  SetNutrientsType,
+} from "./types";
 
 export function rootReducer(
   state: initialStateType,
@@ -11,46 +20,59 @@ export function rootReducer(
   let amount = 0;
   let element: any = {};
 
+  let currentEating: string;
+  let id: string;
+  let products: ProductType;
+  let total: TotalType
+
+  const payload = getPayload(action.payload);
   switch (action.type) {
     case "PRODUCT_GET_ITEMS": {
-      return { ...state, productItems: action.payload };
+      return {
+        ...state,
+        productItems: getPayload<IPrductItem[] | []>(action.payload),
+      };
     }
     case "SET_ITEM_PRODUCT": {
-
       const foodNutrients = find(
         getState(state, ["productItems"]),
         "fdcId",
-        Number(action.payload)
+        Number(payload)
       );
 
       return { ...state, currentProduct: foodNutrients };
     }
     case "SET_CURRENT_EATING": {
-      return { ...state, currentEating: action.payload };
+      return { ...state, currentEating: getPayload<string>(action.payload) };
     }
     case "SET_CURRENT_ID": {
-      return { ...state, currentId: action.payload };
+      return { ...state, currentId: getPayload<string>(action.payload) };
     }
     case "DELETE_PRODUCT": {
-      let symmary = getState(state, [action.payload.currentEating]).symmary;
+      id = getPayload<string>(action.payload, "id");
+      currentEating = getPayload<string>(action.payload, "currentEating");
+      total = getState<TotalType>(state, "total")
 
-      const products = getState(state, [action.payload.currentEating]).products.filter(
-        (item: any) => {
-          if (item.id === action.payload.id) {
-            amount = item.value;
-            element = item;
-            symmary = incdec(symmary, item.value, "-");
-          }
-          return item.id !== action.payload.id;
+      let symmary = getState<EatingType>(state, [currentEating]).symmary;
+
+      const products = getState<EatingType>(state, [
+        currentEating,
+      ]).products.filter((item: IEating) => {
+        if (item.id === id) {
+          amount = item.value;
+          element = item;
+          symmary = incdec(symmary, item.value, "-");
         }
-      );
-      element.nutrients.forEach((elem: any) => {
+        return item.id !== id;
+      });
+      element.nutrients.forEach((elem: IProductItemNutrients) => {
         if (numberMacronutrients.includes(elem.number)) {
           incdec(value, elem.amount, "+");
           value = +(value + elem.amount).toFixed(2);
         }
       });
-      state.total.totalNutrients.map((nutrient: any) => {
+      getState<EatingType>(state, [currentEating])
+      total.totalNutrients.map((nutrient: TotalNutrientsType) => {
         const amount = find(element.nutrients, "name", nutrient.name);
         if (amount) {
           nutrient.amount = incdec(nutrient.amount, amount.amount, "-");
@@ -61,45 +83,58 @@ export function rootReducer(
 
       return {
         ...state,
-        [action.payload.currentEating]: {
-          ...getState(state, [action.payload.currentEating]),
+        [currentEating]: {
+          ...getState<EatingType>(state, [currentEating]),
           products: products,
           symmary: symmary,
         },
         total: {
-          ...getState(state, "total"),
-          left: fixed(getState(state, "total").left + amount),
-          consumed: fixed(getState(state, "total").consumed - amount),
-          totalNutrients: getState(state, "total").totalNutrients,
+          ...total,
+          left: fixed(total.left + amount),
+          consumed: fixed(
+            total.consumed - amount
+          ),
+          totalNutrients: total.totalNutrients,
           totalNutrientsMass: fixed(state.total.totalNutrientsMass - value),
         },
       };
     }
     case "SET_EATING": {
+      currentEating = getPayload<string>(action.payload, "eating");
+      products = getPayload<ProductType>(action.payload, "products");
       return {
         ...state,
-        [action.payload.eating]: {
+        [currentEating]: {
           products: [
-            ...getState(state, [action.payload.eating]).products,
-            action.payload.products,
+            ...getState<EatingType>(state, [currentEating]).products,
+            products,
           ],
           symmary: fixed(
-            getState(state, [action.payload.eating]).symmary + action.payload.products.value,
+            getState<EatingType>(state, [currentEating]).symmary +
+              products.value,
             0
           ),
         },
       };
     }
     case "SET_NUTRIENTS": {
-      getState(state, "total").totalNutrients.map((item: any) => {
-        const amount = find(action.payload.totalNutrients, "name", item.name);
-        if (amount) {
-          item.amount = incdec(item.amount, amount.amount, "+");
-        }
-        return item;
-      });
+      total = getState<TotalType>(state, "total")
 
-      action.payload.totalNutrients.forEach((elem: any) => {
+      total.totalNutrients.map(
+        (item: TotalNutrientsType) => {
+          const amount = find(
+            getPayload<SetNutrientsType>(action.payload).totalNutrients,
+            "name",
+            item.name
+          );
+          if (amount) {
+            item.amount = incdec(item.amount, amount.amount, "+");
+          }
+          return item;
+        }
+      );
+
+      getPayload<SetNutrientsType>(action.payload).totalNutrients.forEach((elem: IProductItemNutrients) => {
         if (numberMacronutrients.includes(elem.number)) {
           value = incdec(value, elem.amount, "+");
         }
@@ -108,11 +143,16 @@ export function rootReducer(
       return {
         ...state,
         total: {
-          left: fixed(getState(state, "total").left - action.payload.consumed),
-          consumed: fixed(getState(state, "total").consumed + action.payload.consumed),
-          totalNutrients: getState(state, "total").totalNutrients,
+          left: fixed(
+            total.left - action.payload.consumed
+          ),
+          consumed: fixed(
+            total.consumed +
+              action.payload.consumed
+          ),
+          totalNutrients: total.totalNutrients,
           totalNutrientsMass: fixed(
-            getState(state, "total").totalNutrientsMass + value
+            total.totalNutrientsMass + value
           ),
         },
       };
@@ -122,8 +162,13 @@ export function rootReducer(
   }
 }
 
-function getState(state: any, field: any) {
+function getState<T>(state: any, field: any): T {
   return state[field];
 }
 
-
+function getPayload<T>(action: any, field?: any): T {
+  if (field) {
+    return action[field];
+  }
+  return action;
+}

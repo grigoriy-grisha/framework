@@ -37,6 +37,9 @@ export type initialStateType = typeof initialState
 
 export type TotalType = typeof initialState.total
 
+export type EatingType = typeof initialState.Breakfast
+
+export type TotalNutrientsType = typeof initialState.total.totalNutrients[0]
 
 type ProperiesType<T> = T extends {[key: string]: infer U} ? U : never
 

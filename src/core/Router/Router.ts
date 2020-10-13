@@ -1,12 +1,19 @@
+import { PageComponent } from './../Components/PageComponent';
+
 import { ActiveRouter } from "./ActiveRouter";
 import { $ } from "../Utils/dom";
 import { getPage } from "../Utils/utils";
 
+
+type OptionsRouteType = {
+  [key: string]: PageComponent
+}
+
 export class Router {
-  pages: any;
-  prevPage: any;
+  pages: OptionsRouteType;
+  prevPage: PageComponent | null;
   selector: string;
-  constructor(selector: string, pages: any) {
+  constructor(selector: string, pages: OptionsRouteType) {
     this.pages = pages;
     this.selector = selector;
     this.init();

@@ -51,6 +51,7 @@ export class Product extends Component<{}> {
   }
 
   storeChanged(change: any) {}
+
   init() {
     super.init();
   }
@@ -72,7 +73,6 @@ export class Product extends Component<{}> {
       value = !!validationMass(input!.value())
         ? (energy * +input!.value()) / 100
         : energy;
-      console.log(value);
 
       const id = hash();
       this.$dispatch(

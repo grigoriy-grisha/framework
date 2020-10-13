@@ -17,8 +17,11 @@ import { Product } from "./components/Product/Product";
 const state = initState(storageName, initialState);
 const store = new createStore(rootReducer, state);
 
+
+
+
 const main = new PageComponent({
-  components: [Header, Main],
+  components:  [Header, Main],
   class: "main",
   store: store,
 });
@@ -39,8 +42,10 @@ store.subscribe((state: any) => {
   storage(storageName, state);
 });
 
-new Router("#app", {
+const options = {
   "": main,
   search: search,
   "search/:id": product,
-});
+}
+
+new Router("#app", options);
