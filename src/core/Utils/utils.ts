@@ -48,10 +48,7 @@ export function maxPage(length: number, range: number) {
 
 export function validationMass(str: string = "") {
   let coincidence = str.replace(/\D/, "");
- 
-  // if (coincidence.match(/\D/)) {
-  //   coincidence = '100'
-  // }
+
   if (coincidence) {
     return coincidence;
   }
@@ -78,25 +75,4 @@ export function incdec(left: number, right: number, operator: "+" | "-") {
 export function fixed(expresion: number, fixed: number = 2) {
   return +expresion.toFixed(fixed);
 }
-// export const IndexedArray = new Proxy(Array, {
-//   construct(target, [args]) {
-//     const index = {}
-//     args.forEach((item: any) => (index[item.id] = item))
 
-//     return new Proxy(new target(...args), {
-//       get(arr, prop) {
-//         switch (prop) {
-//           case 'push':
-//             return (item: any) => {
-//               index[item.id] = item
-//               arr[prop].call(arr, item)
-//             }
-//           case 'findById':
-//             return id => index[id]
-//           default:
-//             return arr[prop]
-//         }
-//       }
-//     })
-//   }
-// })

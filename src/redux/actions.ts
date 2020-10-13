@@ -1,5 +1,5 @@
 import { InferActionsTypes } from "./initialState";
-import { deleteProductType, SetEatingType, SetNutrientsType } from "./types";
+import { DeleteProductType, SetEatingType, SetNutrientsType } from "./types";
 
 export const actions = {
   getItemsProduct: (data: Array<IPrductItem> | []) => ({ type: "PRODUCT_GET_ITEMS", payload: data } as const),
@@ -14,7 +14,7 @@ export const actions = {
     
   setNutrients: (data: SetNutrientsType) => ({ type: "SET_NUTRIENTS", payload: data } as const),
 
-  deleteProduct: (data: deleteProductType) => ({ type: "DELETE_PRODUCT", payload: data } as const),
+  deleteProduct: (data: DeleteProductType) => ({ type: "DELETE_PRODUCT", payload: data } as const),
 
 };
 
