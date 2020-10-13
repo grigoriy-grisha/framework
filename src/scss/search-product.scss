@@ -3,10 +3,11 @@
     max-width: 1400px;
     margin: 0 auto;
     margin-top: 25px;
+ 
 
     &__input {
         margin-left: 15px;
-
+        margin: 0 auto;
         &::placeholder {
             color: #747474;
         }
@@ -19,6 +20,7 @@
         align-items: center;
         border-bottom: 1px solid #757575;
         font-weight: 600;
+        margin: 0 auto;
     }
 
     &__flipping {
@@ -44,4 +46,8 @@
         }
 
     }
+}
+.input-wrapper {
+    width: 900px;
+    margin: 0 auto;
 }
