@@ -56,8 +56,13 @@ export class Component<S> extends DomListener  {
   }
 
   init() {
+  
     this.$main = $(document.body).find(classes(this.options.className))!;
 
+    if (!this.$main) {
+      throw new Error(`${classes(this.options.className)} don't defined! Append this Element in DOM`)
+    }
+    
     this.initDomListeners();
   }
 

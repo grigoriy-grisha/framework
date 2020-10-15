@@ -36,7 +36,11 @@ export class StoreSubscriber {
   }
 
   unsubscribeComponents() {   
+    console.log(this.sub);
+    
     this.sub.unsubscribe();
+    console.log(this.sub);
+    
   }
 }
 

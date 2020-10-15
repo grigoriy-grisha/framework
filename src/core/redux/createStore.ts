@@ -1,7 +1,12 @@
+
+
 export class createStore {
   state: any;
-  listeners: any;
-  constructor(protected rootReducer: any, protected initialState: any) {
+  listeners: Array<(...args: any) => any>;
+  constructor(
+    protected rootReducer: any,
+    protected initialState?: any
+  ) {
     this.state = rootReducer({ ...initialState }, { type: "__INIT__" });
     this.listeners = [];
     this.rootReducer = rootReducer;
@@ -9,23 +14,25 @@ export class createStore {
 
   dispatch<T>(action: T) {
     this.state = this.rootReducer(this.state, action);
-    this.listeners.forEach((listener: any) => listener(this.state));
+    this.listeners.forEach((listener: (...args: any) => any) =>
+      listener(this.state)
+    );
   }
 
   getState() {
     return JSON.parse(JSON.stringify(this.state));
   }
 
-  subscribe(fn: any) {
+  subscribe(fn: (...args: any) => any) {
     this.listeners.push(fn);
 
+    
     return {
-      unsubscribe: () => {
-        this.listeners.filter((l: any) => l !== fn);
+      unsubscribe: () => {        
+        this.listeners = this.listeners.filter((l: (...args: any) => any) => l !== fn);
       },
     };
   }
 }
-
 
 export type StoreType = createStore

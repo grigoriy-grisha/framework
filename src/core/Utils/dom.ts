@@ -16,7 +16,7 @@ class Dom {
     }
   }
 
-  html(html: string) {
+  html(html?: string) {
     if (html) {
       
       this.$el.innerHTML = html;
