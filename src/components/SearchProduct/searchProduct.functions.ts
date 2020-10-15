@@ -1,23 +1,27 @@
-
-
 export function renderProductItems(array: any, page: number, range: number) {
-  const end = range * page;
+  let end = range * page;
   const start = end - range;
-
-
+  const length = array.length;
   
+  if (end > length) {
+    end = length;
+  }
+
   let markup = "";
-  let energy 
+  let energy;
 
   if (array.length) {
     for (let i = start; i < end; i++) {
       const item = array[i];
-      energy = findField(item, "Energy") ? findField(item, "Energy") : 0
+      energy = findField(item, "Energy") ? findField(item, "Energy") : 0;
 
-      
       markup += `
-          <a href="#search/${item.fdcId}" class="black-color ${energy ? '' : 'cursor-default'}">
-            <div class="search-product--item ${energy ? 'background-hover ' : 'disable'} " ${energy ? `data-type="product" data-id="${item.fdcId}"` : ''} >
+          <a href="#search/${item.fdcId}" class="black-color ${
+        energy ? "" : "cursor-default"
+      }">
+            <div class="search-product--item ${
+              energy ? "background-hover " : "disable"
+            } " ${energy ? `data-type="product" data-id="${item.fdcId}"` : ""} >
                 <div>
                     <div class="search-product__name">Name: <span>${
                       item.description
@@ -27,14 +31,14 @@ export function renderProductItems(array: any, page: number, range: number) {
                     }</span></div>
                 </div>
                 <div>Ccal: <span class="green-color"> ${
-                  energy ? energy.amount : 'NONE'
+                  energy ? energy.amount : "NONE"
                 }</span></div>
             </div>
           </a>
       `;
     }
   } else {
-    markup += `<div class="not-found">Not found Product!</div>`
+    markup += `<div class="not-found">Not found Product!</div>`;
   }
   return markup;
 }
@@ -42,5 +46,3 @@ export function renderProductItems(array: any, page: number, range: number) {
 function findField(item: any, field: string) {
   return item.foodNutrients.find((item: any) => item.name === field);
 }
-
-
