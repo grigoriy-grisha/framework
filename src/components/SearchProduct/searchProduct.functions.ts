@@ -4,7 +4,7 @@ export function renderProductItems(array: any, page: number, range: number) {
   const end = range * page;
   const start = end - range;
 
-  console.log(array);
+
   
   let markup = "";
   let energy 

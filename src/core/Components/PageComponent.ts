@@ -1,4 +1,4 @@
-import { Header } from "./../../components/Header/Header";
+
 
 import { Component as ComponentParent } from "./Component";
 
@@ -6,6 +6,7 @@ import { $ } from "../Utils/dom";
 import { StoreSubscriber, StoreSubscriberType } from "../redux/StoreSubscriber";
 import { hashCode } from "../Utils/utils";
 import { StoreType } from "../redux/createStore";
+
 
 export type PageComponentInstanceType = PageComponent;
 

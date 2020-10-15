@@ -11,21 +11,17 @@ import { initState, storage } from "./core/Utils/utils";
 import { storageName } from "./constants";
 import { Product } from "./components/Product/Product";
 
-
-
-
 const state = initState(storageName, initialState);
+
 const store = new createStore(rootReducer, state);
 
 
 
-
 const main = new PageComponent({
-  components:  [Header, Main],
+  components: [Header, Main],
   class: "main",
   store: store,
 });
-
 
 const search = new PageComponent({
   components: [Header, SearchProduct],
@@ -46,6 +42,6 @@ const options = {
   "": main,
   search: search,
   "search/:id": product,
-}
+};
 
 new Router("#app", options);

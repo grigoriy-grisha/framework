@@ -30,7 +30,7 @@ export class Router {
     const path = ActiveRouter.path;
     const param = ActiveRouter.param
     const $mainSelector = $(document.body).find(this.selector);
-
+    
     if (!!getPage(this.pages, path, param) && $mainSelector) {
       if (this.prevPage) {
         this.prevPage.destroy();
@@ -56,6 +56,6 @@ export class Router {
   }
 
   destroy() {
-    addEventListener("hashchange", () => this.handlerhash());
+    removeEventListener("hashchange", () => this.handlerhash());
   }
 }

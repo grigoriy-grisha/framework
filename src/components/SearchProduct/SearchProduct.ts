@@ -123,7 +123,7 @@ export class SearchProduct extends Component<StateType> {
     }
   }
 
-  storeChanged(change: any) {}
+
 
   init() {
     super.init();
