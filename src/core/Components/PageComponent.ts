@@ -11,12 +11,14 @@ import { StoreType } from "../redux/createStore";
 export type PageComponentInstanceType = PageComponent;
 
 export class PageComponent {
+  
   protected components: Array<any>;
   protected store: StoreType;
   protected class: string;
   protected storeSubscriber: StoreSubscriberType;
   protected initComponents: Array<any>;
   protected className: null | string;
+
   constructor(protected options: PageType) {
     this.components = options.components;
     this.initComponents = [];

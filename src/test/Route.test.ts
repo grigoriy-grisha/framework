@@ -39,7 +39,5 @@ describe("testing route", () => {
     route.handlerhash()
     window.location.hash = ''
     expect(app.find('.mock')?.html()).toBe('<div class="mock">mock!!!0</div>')
-
-    
   });
 });

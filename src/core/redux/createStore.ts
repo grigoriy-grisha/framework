@@ -1,8 +1,9 @@
+import { initialStateType } from './../../redux/initialState';
 
 
 export class createStore {
-  state: any;
-  listeners: Array<(...args: any) => any>;
+  protected state: initialStateType;
+  protected listeners: Array<(...args: any) => any>;
   constructor(
     protected rootReducer: any,
     protected initialState?: any
@@ -35,4 +36,7 @@ export class createStore {
   }
 }
 
+
+
 export type StoreType = createStore
+

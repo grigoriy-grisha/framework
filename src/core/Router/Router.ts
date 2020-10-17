@@ -5,14 +5,14 @@ import { $ } from "../Utils/dom";
 import { getPage } from "../Utils/utils";
 
 
-type OptionsRouteType = {
+export type OptionsRouteType = {
   [key: string]: PageComponent
 }
 
 export class Router {
-  pages: OptionsRouteType;
-  prevPage: PageComponent | null;
-  selector: string;
+  protected pages: OptionsRouteType;
+  protected prevPage: PageComponent | null;
+  protected selector: string;
   constructor(selector: string, pages: OptionsRouteType) {
     this.pages = pages;
     this.selector = selector;
@@ -37,9 +37,9 @@ export class Router {
       }
       $mainSelector.clear();
          
-      const page = getPage(this.pages, path, param).getRoot();
+      const page = getPage<PageComponent>(this.pages, path, param).getRoot();
       $mainSelector.append(page);
-      getPage(this.pages, path, param).init();
+      getPage<PageComponent>(this.pages, path, param).init()
 
       this.prevPage = getPage(this.pages, path, param)
     

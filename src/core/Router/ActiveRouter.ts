@@ -1,11 +1,11 @@
 export class ActiveRouter {
   constructor() {}
 
-  static get path() {
+  static get path(): string {
     return window.location.hash.slice(1);
   }
 
-  static get param() {
+  static get param(): string {
     return ActiveRouter.path.split("/")[1];
   }
 
@@ -13,7 +13,7 @@ export class ActiveRouter {
     window.location.hash = path;
   }
 
-  static get href() {
+  static get href(): string {
     return window.location.href;
   }
 

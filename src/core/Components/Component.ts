@@ -8,9 +8,9 @@ import { StoreType } from "../redux/createStore";
 
 
 export class Component<S> extends DomListener  {
-  store: StoreType;
-  state!: S;
-  subscribe: Array<string>;
+  protected store: StoreType;
+  protected state!: S;
+  protected subscribe: Array<string>;
   $main!: DomInstanseType;
   constructor(protected options: OptionsType) {
     super(options.listeners, options.className);

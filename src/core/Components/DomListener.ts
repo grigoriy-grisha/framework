@@ -3,7 +3,7 @@ import { $ } from "../Utils/dom";
 import { classes } from "../Utils/utils";
 
 export class DomListener {
-  $main!: DomInstanseType;
+  protected $main!: DomInstanseType;
   constructor(protected listeners: Array<string>, protected className: string) {
  
     if (!className) {

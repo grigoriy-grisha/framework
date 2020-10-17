@@ -1,8 +1,9 @@
+import { initialStateType } from './../../redux/initialState';
 import { isEqual } from "../Utils/utils";
 
 export class StoreSubscriber {
-  sub: any;
-  prevState: any;
+  protected sub: any;
+  protected prevState: any;
   constructor(protected store: any) {
     this.store = store;
     this.sub = null;
@@ -14,9 +15,8 @@ export class StoreSubscriber {
 
     
     this.sub = this.store.subscribe((state: any) => {
-
-      
-      Object.keys(state).forEach((key) => {
+    
+      Object.keys(state).forEach((key: string) => {
         if (!isEqual(this.prevState[key], state[key])) {
           components.forEach((component: any) => {
 
@@ -43,6 +43,7 @@ export class StoreSubscriber {
     
   }
 }
+
 
 
 export type StoreSubscriberType = StoreSubscriber
